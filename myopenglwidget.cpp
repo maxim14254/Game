@@ -11,7 +11,6 @@
 
 TCell* cells;
 Way* ways;
-Control control;
 std::allocator<TCell> AllocCells;
 std::allocator<Way> AllocWays;
 std::vector<int> indexes;
@@ -35,7 +34,7 @@ float AllColrors[7][3] = {
 };
 std::chrono::time_point<std::chrono::steady_clock> animTime;
 int colorNumb = 0;
-size_t index = 0;
+size_t index1 = 0;
 int maxId = 0;
 bool Anim = false;
 bool RevAnim = false;
@@ -239,7 +238,7 @@ void AnimateChangeColor(TCell* cell, bool revers = false)
         return;
     else if (cell->isPaint && !revers)
     {
-        ++index;
+        ++index1;
         return;
     }
     animTime = time;
@@ -249,14 +248,14 @@ void AnimateChangeColor(TCell* cell, bool revers = false)
     {
         col = -0.9f;
         cell->isPaint = false;
-        --index;
+        --index1;
         RevAnim = true;
     }
     else
     {
         col = 0.9f;
         cell->isPaint = true;
-        ++index;
+        ++index1;
         RevAnim = false;
     }
 
@@ -288,27 +287,27 @@ void MyOpenGLWidget::Scene2()
 
     Game_Show();
 
-    if (Anim && indexes.size() > index && !RevAnim)
+    if (Anim && indexes.size() > index1 && !RevAnim)
     {
-        if (cells[indexes[index]].Id > maxId)
-            maxId = cells[indexes[index]].Id;
+        if (cells[indexes[index1]].Id > maxId)
+            maxId = cells[indexes[index1]].Id;
 
-        AnimateChangeColor(&cells[indexes[index]]);
+        AnimateChangeColor(&cells[indexes[index1]]);
     }
-    else if ((Anim && indexes.size() <= index) || RevAnim)
+    else if ((Anim && indexes.size() <= index1) || RevAnim)
     {
-        AnimateChangeColor(&cells[indexes[index - 1]], true);
+        AnimateChangeColor(&cells[indexes[index1 - 1]], true);
     }
 
-    if (Anim && indexes.size() == index && maxId > mapW * mapH - mapW - 1)
+    if (Anim && indexes.size() == index1 && maxId > mapW * mapH - mapW - 1)
     {
         maxId = 0;
         Anim = false;
-        index = 0;
+        index1 = 0;
         gameNew = true;
     }
 
-    if (index == 0)
+    if (index1 == 0)
     {
         indexes.clear();
         RevAnim = false;
@@ -333,12 +332,12 @@ MyOpenGLWidget::~MyOpenGLWidget()
 {
     std::allocator_traits<std::allocator<TCell>>::deallocate(AllocCells, cells, mapH * mapW);
     std::allocator_traits<std::allocator<Way>>::deallocate(AllocWays, ways, mapH * mapW);
+
+    control.Delete();
 };
 
 void MyOpenGLWidget::initializeGL()
 {
-    initializeOpenGLFunctions();
-
     cells = std::allocator_traits<std::allocator<TCell>>::allocate(AllocCells, mapH * mapW);
     ways = std::allocator_traits<std::allocator<Way>>::allocate(AllocWays, mapH * mapW);
 };
@@ -352,7 +351,7 @@ void MyOpenGLWidget::paintGL()
     {
         Scene1();
 
-        index = 0;
+        index1 = 0;
         maxId = 0;
     }
     else

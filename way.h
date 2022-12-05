@@ -2,7 +2,7 @@
 #define WAY_H
 
 #include "tcell.h"
-#include <vector>
+
 
 class Way
 {

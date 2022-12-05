@@ -25,5 +25,6 @@ void MainWindow::on_action_triggered()
 {
     ui->widget->GameLevel = 0;
     ui->widget->gameNew = false;
+    ui->widget->control.Delete();
 }
 

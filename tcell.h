@@ -1,6 +1,7 @@
 #ifndef TCELL_H
 #define TCELL_H
-#include <ostream>
+#include <vector>
+#include <iostream>
 
 class TCell
 {

@@ -1,16 +1,17 @@
 #include <QtOpenGLWidgets>
-#include <qopenglfunctions_4_5_core.h>
+#include "control.h""
 
 #ifndef MYOPENGLWIDGET_H
 #define MYOPENGLWIDGET_H
 
 
-class MyOpenGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_4_5_Core
+class MyOpenGLWidget : public QOpenGLWidget
 {
 public:
     explicit MyOpenGLWidget(QWidget* parent);
     size_t GameLevel = 0;
     bool gameNew = false;
+    Control control;
      ~MyOpenGLWidget();
 protected:
     void initializeGL() override;

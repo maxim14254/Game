@@ -3,7 +3,6 @@
 #include <string>
 #include "menu.h"
 #include "GL/gl.h"
-#include "qdebug.h"
 
 
 typedef std::string string;
