@@ -1,4 +1,4 @@
-#include <QtOpenGLWidgets>
+#include <QtOpenGL>>
 #include "control.h""
 
 #ifndef MYOPENGLWIDGET_H

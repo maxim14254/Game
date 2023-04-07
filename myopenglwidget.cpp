@@ -366,7 +366,7 @@ void MyOpenGLWidget::paintGL()
 
 void MyOpenGLWidget::mousePressEvent(QMouseEvent *event)
 {   
-    auto xy = event->position();
+    auto xy = event->pos();
 
     int width = this->width()/2;
     int height = this->height()/2;
@@ -480,7 +480,7 @@ void MyOpenGLWidget::mousePressEvent(QMouseEvent *event)
 
 void MyOpenGLWidget::mouseReleaseEvent(QMouseEvent *event)
 {
-    auto xy = event->position();
+    auto xy = event->pos();
 
     int width = this->width()/2;
     int height = this->height()/2;
